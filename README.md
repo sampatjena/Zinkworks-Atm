@@ -14,10 +14,11 @@ Use cases which have been documented and developed are :
  All the api's are secured endpoints account number pin combination , which are mandatory parameters for making any request.
 
  Technologies Used
-	- Java 8
-	- Spring Boot 2.7.0
-	- H2 Inmemory DB
-	- Maven for code compilation and running of application.
+	
+	1. Java 8
+	2. Spring Boot 2.7.0
+	3. H2 Inmemory DB
+	4. Maven for code compilation and running of application.
 
 Unit testing and code coverage for the Controller , Service and Repository clasess are at 60% .
 Details of the testing and code coverage report are available at folder location : 
