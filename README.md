@@ -17,6 +17,9 @@ Use cases which have been documented and developed are :
 - H2 Inmemory DB
 - Maven for code compilation and running of application.
 
+Unit testing and code coverage for the Controller , Service and Repository clasess are at 60% .
+Details of the testing and code coverage report are available at folder location : site -> index.html
+
 Spring rest controller post endpoints for various transactions are :
 1. Customer view balance: /v1/api/atm/accountdetails                     
   1.1 Json format request  examples :                             
