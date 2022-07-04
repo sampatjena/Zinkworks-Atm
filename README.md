@@ -18,7 +18,8 @@ Use cases which have been documented and developed are :
 - Maven for code compilation and running of application.
 
 Unit testing and code coverage for the Controller , Service and Repository clasess are at 60% .
-Details of the testing and code coverage report are available at folder location : site -> index.html
+Details of the testing and code coverage report are available at folder location : 
+https://github.com/sampatjena/Zinkworks-Atm/blob/d0d1874237ecb9b4b0384832251c07da21ce78d3/site/jacoco/index.html
 
 Spring rest controller post endpoints for various transactions are :
 1. Customer view balance: /v1/api/atm/accountdetails                     
