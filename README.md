@@ -24,4 +24,5 @@ Spring rest controller post endpoints for various transactions are :
   2.2 Json response :
      Currency disbursed : 1 Fifty Euro.1 Twenty Euro.1 Ten Euro.
 
-Github respository information :
+Github respository information : https://github.com/sampatjena/Zinkworks-Atm.git
+
