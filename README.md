@@ -32,9 +32,9 @@ Spring rest controller post endpoints for various transactions are :
     "accountOverdraftAmount": 150.0,
     "accountTotalWithdrawlAmountWithOverdraft": 1380.0
    } 
-
-   2. Customer request to withdraw amount : /v1/api/atm/accountwithdrawl
-  2.1 Json format request exmaple :
+   
+2. Customer request to withdraw amount : /v1/api/atm/accountwithdrawl
+   2.1 Json format request exmaple :
     
 	{
     "accountNumber": "987654321",
