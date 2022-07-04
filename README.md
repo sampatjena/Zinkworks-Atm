@@ -3,19 +3,21 @@ Spring boot code for Atm customer transactions.
 Use cases which have been documented and developed are :
 
 1 User (assume any rest client – curl, postman, browser) should be able to request a balance
-  check along with maximum withdrawal amount (if any),
+  check along with maximum withdrawal amount (if any).
+  
 2 .User should be able to request a withdrawal. If successful - details of the notes that would
-  be dispensed along with remaining balance,
+  be dispensed along with remaining balance.
+  
 3 If anything goes wrong, user should receive meaningful message, and there should be no
   changes in user’s account.
   
  All the api's are secured endpoints account number pin combination , which are mandatory parameters for making any request.
 
-### Technologies Used
-- Java 8
-- Spring Boot 2.7.0
-- H2 Inmemory DB
-- Maven for code compilation and running of application.
+ Technologies Used
+	- Java 8
+	- Spring Boot 2.7.0
+	- H2 Inmemory DB
+	- Maven for code compilation and running of application.
 
 Unit testing and code coverage for the Controller , Service and Repository clasess are at 60% .
 Details of the testing and code coverage report are available at folder location : 
