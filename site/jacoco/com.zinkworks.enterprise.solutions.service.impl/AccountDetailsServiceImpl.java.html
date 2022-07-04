@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AccountDetailsServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Zinkworks-Atm</a> &gt; <a href="index.source.html" class="el_package">com.zinkworks.enterprise.solutions.service.impl</a> &gt; <span class="el_source">AccountDetailsServiceImpl.java</span></div><h1>AccountDetailsServiceImpl.java</h1><pre class="source lang-java linenums">package com.zinkworks.enterprise.solutions.service.impl;
+
+import java.util.Optional;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import com.zinkworks.enterprise.solutions.dto.AccountDetailsRequest;
+import com.zinkworks.enterprise.solutions.dto.AccountDetailsResponse;
+import com.zinkworks.enterprise.solutions.dto.AccountWithdrawlResponse;
+import com.zinkworks.enterprise.solutions.entity.Account;
+import com.zinkworks.enterprise.solutions.exception.AccountDetailsException;
+import com.zinkworks.enterprise.solutions.repository.AccountRepository;
+import com.zinkworks.enterprise.solutions.service.AccountDetailsService;
+
+@Service
+<span class="fc" id="L19">public class AccountDetailsServiceImpl implements AccountDetailsService{</span>
+	
+	@Value(&quot;${account.valid.message}&quot;)
+	private String accountErrorMessage;
+
+	@Autowired
+	public AccountRepository accountRepositoryObject;
+	
+
+	@Override
+	public Account getAccountDetailsFromDbForRequest(AccountDetailsRequest accountDetailsRequest) {
+<span class="fc" id="L30">		return accountRepositoryObject.findByAccountNumberAndAccountPin(accountDetailsRequest.getAccountNumber() , accountDetailsRequest.getAccountPin());</span>
+	}
+
+	@Override
+	public boolean isAccountActive(Account selectedAccount)  {
+<span class="fc" id="L35">		boolean accountActive = false;</span>
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">		if (selectedAccount != null) {</span>
+<span class="pc bpc" id="L37" title="1 of 2 branches missed.">			if (selectedAccount.getAccountStatus().equalsIgnoreCase(&quot;Y&quot;))</span>
+<span class="fc" id="L38">				accountActive = true;</span>
+		}
+<span class="fc" id="L40">		return accountActive;</span>
+	}
+	
+	
+	public AccountDetailsResponse getAccountBalanceDetails(AccountDetailsRequest accountDetailsRequest) throws AccountDetailsException {
+<span class="fc" id="L45">		AccountDetailsResponse accountBalanceResponseObject = null;</span>
+		
+<span class="fc" id="L47">			Optional&lt;Account&gt; accountDetailsFromDB = Optional.ofNullable(getAccountDetailsFromDbForRequest(accountDetailsRequest));</span>
+<span class="pc bpc" id="L48" title="1 of 4 branches missed.">				if (accountDetailsFromDB.isPresent() &amp;&amp; isAccountActive(accountDetailsFromDB.get())) {</span>
+						
+<span class="fc" id="L50">						accountBalanceResponseObject = new AccountDetailsResponse();</span>
+<span class="fc" id="L51">						accountBalanceResponseObject.setAccountBalanceAmount(accountDetailsFromDB.get().getOpeningBalanceAmount());</span>
+<span class="fc" id="L52">						accountBalanceResponseObject.setAccountOverdraftAmount(accountDetailsFromDB.get().getOverdraftAmount());</span>
+						
+					}
+				else {
+<span class="fc" id="L56">					throw new AccountDetailsException(accountErrorMessage);</span>
+				}
+			
+<span class="fc" id="L59">		return accountBalanceResponseObject;</span>
+	}
+	
+	public void updateAccountDetails(Account accountDetails) {
+<span class="fc" id="L63">		accountRepositoryObject.save(accountDetails);</span>
+<span class="fc" id="L64">	}</span>
+	
+	public Account updateAccountBalance(Account accountDetails , double amountWithdrawn) {
+<span class="fc" id="L67">		double currentOpeningBalance = accountDetails.getOpeningBalanceAmount();</span>
+<span class="fc" id="L68">		double currentOverdraftAmount = accountDetails.getOverdraftAmount();</span>
+<span class="pc bpc" id="L69" title="2 of 4 branches missed.">		if ((currentOpeningBalance != 0.0) &amp;&amp; </span>
+				((currentOpeningBalance - amountWithdrawn) &gt; 0))
+		{
+<span class="fc" id="L72">			accountDetails.setOpeningBalanceAmount(currentOpeningBalance - amountWithdrawn);</span>
+		}
+		
+<span class="nc bnc" id="L75" title="All 4 branches missed.">		else if ((currentOpeningBalance == 0.0) &amp;&amp;</span>
+				(currentOverdraftAmount - amountWithdrawn) &gt; 0)
+		{
+<span class="nc" id="L78">			accountDetails.setOverdraftAmount(amountWithdrawn);</span>
+		}
+<span class="pc bpc" id="L80" title="1 of 2 branches missed.">		if (currentOpeningBalance - amountWithdrawn == 0) {</span>
+<span class="nc" id="L81">			accountDetails.setOpeningBalanceAmount(0);</span>
+		}
+<span class="pc bpc" id="L83" title="3 of 4 branches missed.">		if ((accountDetails.getOpeningBalanceAmount()== 0) </span>
+				&amp;&amp; (currentOverdraftAmount - amountWithdrawn == 0)) {
+<span class="nc" id="L85">			accountDetails.setOverdraftAmount(0);</span>
+		}
+<span class="fc" id="L87">		return accountDetails;</span>
+	}
+	
+	public AccountWithdrawlResponse updateResponseWithAccountBalance( AccountWithdrawlResponse withdrawlResponse) {
+<span class="nc" id="L91">		AccountWithdrawlResponse updatedWithDrawlResponse = new AccountWithdrawlResponse();</span>
+<span class="nc" id="L92">		updatedWithDrawlResponse.setFiftyCurrencyCount(withdrawlResponse.getFiftyCurrencyCount());</span>
+<span class="nc" id="L93">		updatedWithDrawlResponse.setTwentyCurrencyCount(withdrawlResponse.getTwentyCurrencyCount());</span>
+<span class="nc" id="L94">		updatedWithDrawlResponse.setTenCurrencyCount(withdrawlResponse.getTenCurrencyCount());</span>
+<span class="nc" id="L95">		updatedWithDrawlResponse.setFiveCurrencyCount(withdrawlResponse.getFiveCurrencyCount());</span>
+		/*
+		 * AccountDetailsRequest updatedDetailsRequest = new
+		 * AccountDetailsRequest();
+		 * updatedDetailsRequest.setAccountNumber(accountDetails.
+		 * getAccountNumber());
+		 * updatedDetailsRequest.setAccountPin(accountDetails.getAccountPin());
+		 * Account updatedAccountDetails =
+		 * getAccountDetailsFromDbForRequest(updatedDetailsRequest);
+		 * updatedWithDrawlResponse.setNewWithdrawlBalance(updatedAccountDetails
+		 * .getOpeningBalanceAmount());
+		 * updatedWithDrawlResponse.setNewOverdraftBalance(updatedAccountDetails
+		 * .getOverdraftAmount());
+		 */
+<span class="nc" id="L109">		return updatedWithDrawlResponse;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

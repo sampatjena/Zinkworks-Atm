@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AccountDetailsRequest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Zinkworks-Atm</a> &gt; <a href="index.source.html" class="el_package">com.zinkworks.enterprise.solutions.dto</a> &gt; <span class="el_source">AccountDetailsRequest.java</span></div><h1>AccountDetailsRequest.java</h1><pre class="source lang-java linenums">package com.zinkworks.enterprise.solutions.dto;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
+
+public class AccountDetailsRequest {
+	
+	@NotBlank
+	@Size(min=9, max=9 , message=&quot;Account number must be 9 numbers&quot; )
+	@Positive(message = &quot;Enter a valid account number&quot;)
+	private String accountNumber;
+	
+	@NotBlank
+	@Size(min=4 , max =4 , message=&quot;Pin must be 4 numbers&quot;)
+	@Positive(message = &quot;Enter a valid account pin&quot;)
+	private String accountPin;
+	
+	public AccountDetailsRequest() {
+<span class="fc" id="L20">		super();</span>
+<span class="fc" id="L21">		}</span>
+	
+<span class="nc" id="L23">	public AccountDetailsRequest(String accountNumber, String accountPin) {</span>
+<span class="nc" id="L24">		this.accountNumber = accountNumber;</span>
+<span class="nc" id="L25">		this.accountPin = accountPin;</span>
+<span class="nc" id="L26">	}</span>
+
+	public String getAccountNumber() {
+<span class="fc" id="L29">		return accountNumber;</span>
+	}
+	public void setAccountNumber(String accountNumber) {
+<span class="fc" id="L32">		this.accountNumber = accountNumber;</span>
+<span class="fc" id="L33">	}</span>
+	public String getAccountPin() {
+<span class="fc" id="L35">		return accountPin;</span>
+	}
+	public void setAccountPin(String accountPin) {
+<span class="fc" id="L38">		this.accountPin = accountPin;</span>
+<span class="fc" id="L39">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

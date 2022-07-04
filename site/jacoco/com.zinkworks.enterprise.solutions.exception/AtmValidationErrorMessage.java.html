@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AtmValidationErrorMessage.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Zinkworks-Atm</a> &gt; <a href="index.source.html" class="el_package">com.zinkworks.enterprise.solutions.exception</a> &gt; <span class="el_source">AtmValidationErrorMessage.java</span></div><h1>AtmValidationErrorMessage.java</h1><pre class="source lang-java linenums">package com.zinkworks.enterprise.solutions.exception;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class AtmValidationErrorMessage {
+	
+	private int statusCode;
+	private String errorDateTime;
+<span class="nc" id="L10">	private List&lt;String&gt; validationErrors = new ArrayList&lt;&gt;();</span>
+	
+	public AtmValidationErrorMessage()
+<span class="nc" id="L13">	{</span>
+		
+<span class="nc" id="L15">	}</span>
+
+	public AtmValidationErrorMessage(int statusCode, String errorDateTime,
+			List&lt;String&gt; validationErrors) {
+<span class="nc" id="L19">		super();</span>
+<span class="nc" id="L20">		this.statusCode = statusCode;</span>
+<span class="nc" id="L21">		this.errorDateTime = errorDateTime;</span>
+<span class="nc" id="L22">		this.validationErrors = validationErrors;</span>
+<span class="nc" id="L23">	}</span>
+
+	public int getStatusCode() {
+<span class="nc" id="L26">		return statusCode;</span>
+	}
+
+	public void setStatusCode(int statusCode) {
+<span class="nc" id="L30">		this.statusCode = statusCode;</span>
+<span class="nc" id="L31">	}</span>
+
+	public String getErrorDateTime() {
+<span class="nc" id="L34">		return errorDateTime;</span>
+	}
+
+	public void setErrorDateTime(String errorDateTime) {
+<span class="nc" id="L38">		this.errorDateTime = errorDateTime;</span>
+<span class="nc" id="L39">	}</span>
+
+	public List&lt;String&gt; getValidationErrors() {
+<span class="nc" id="L42">		return validationErrors;</span>
+	}
+
+	public void setValidationErrors(List&lt;String&gt; validationErrors) {
+<span class="nc" id="L46">		this.validationErrors = validationErrors;</span>
+<span class="nc" id="L47">	}</span>
+	  
+	
+	
+	
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AtmCurrency.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Zinkworks-Atm</a> &gt; <a href="index.source.html" class="el_package">com.zinkworks.enterprise.solutions.dto</a> &gt; <span class="el_source">AtmCurrency.java</span></div><h1>AtmCurrency.java</h1><pre class="source lang-java linenums">package com.zinkworks.enterprise.solutions.dto;
+
+public class AtmCurrency {
+	
+	private int fiftyCurrencyCount;
+	private int twentyCurrencyCount;
+	private int tenCurrencyCount;
+	private int fiveCurrencyCount;
+	private int amountNotDisburshed;
+	
+	
+<span class="fc" id="L12">	public AtmCurrency() {</span>
+		
+<span class="fc" id="L14">	}</span>
+
+	public int getFiftyCurrencyCount() {
+<span class="fc" id="L17">		return fiftyCurrencyCount;</span>
+	}
+
+	public void setFiftyCurrencyCount(int fiftyCurrencyCount) {
+<span class="fc" id="L21">		this.fiftyCurrencyCount = fiftyCurrencyCount;</span>
+<span class="fc" id="L22">	}</span>
+
+	public int getTwentyCurrencyCount() {
+<span class="fc" id="L25">		return twentyCurrencyCount;</span>
+	}
+
+	public void setTwentyCurrencyCount(int twentyCurrencyCount) {
+<span class="fc" id="L29">		this.twentyCurrencyCount = twentyCurrencyCount;</span>
+<span class="fc" id="L30">	}</span>
+
+	public int getTenCurrencyCount() {
+<span class="fc" id="L33">		return tenCurrencyCount;</span>
+	}
+
+	public void setTenCurrencyCount(int tenCurrencyCount) {
+<span class="fc" id="L37">		this.tenCurrencyCount = tenCurrencyCount;</span>
+<span class="fc" id="L38">	}</span>
+
+	public int getFiveCurrencyCount() {
+<span class="fc" id="L41">		return fiveCurrencyCount;</span>
+	}
+
+	public void setFiveCurrencyCount(int fiveCurrencyCount) {
+<span class="fc" id="L45">		this.fiveCurrencyCount = fiveCurrencyCount;</span>
+<span class="fc" id="L46">	}</span>
+
+	public String getDisdursedCurrencyDetailsAsString() {
+<span class="fc" id="L49">		StringBuilder disbursedCurrencyDetails = new StringBuilder();</span>
+<span class="fc" id="L50">		disbursedCurrencyDetails.append(&quot;Currency disbursed :&quot;);</span>
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">		if (getFiftyCurrencyCount() &gt; 0)</span>
+<span class="fc" id="L52">			disbursedCurrencyDetails.append(getFiftyCurrencyCount()).append(&quot; &quot;).append(&quot;Fifty Euro.&quot;);</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">		if (getTwentyCurrencyCount() &gt; 0)</span>
+<span class="fc" id="L54">			disbursedCurrencyDetails.append(getTwentyCurrencyCount()).append(&quot; &quot;).append(&quot;Twenty Euro.&quot;);</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">		if (getTenCurrencyCount() &gt; 0)</span>
+<span class="fc" id="L56">			disbursedCurrencyDetails.append(getTenCurrencyCount()).append(&quot; &quot;).append(&quot;Ten Euro.&quot;);</span>
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">		if (getFiveCurrencyCount()&gt; 0)</span>
+<span class="nc" id="L58">			disbursedCurrencyDetails.append(getFiveCurrencyCount()).append(&quot; &quot;).append(&quot;Five Euro.&quot;);</span>
+		
+<span class="fc" id="L60">		return disbursedCurrencyDetails.toString();</span>
+		
+	}
+
+	public int getAmountNotDisburshed() {
+<span class="fc" id="L65">		return amountNotDisburshed;</span>
+	}
+
+	public void setAmountNotDisburshed(int amountNotDisburshed) {
+<span class="fc" id="L69">		this.amountNotDisburshed = amountNotDisburshed;</span>
+<span class="fc" id="L70">	}</span>
+	
+	
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

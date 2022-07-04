@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AtmServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Zinkworks-Atm</a> &gt; <a href="index.source.html" class="el_package">com.zinkworks.enterprise.solutions.service.impl</a> &gt; <span class="el_source">AtmServiceImpl.java</span></div><h1>AtmServiceImpl.java</h1><pre class="source lang-java linenums">package com.zinkworks.enterprise.solutions.service.impl;
+
+import java.sql.SQLException;
+import java.util.Optional;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.zinkworks.enterprise.solutions.dto.AccountWithdrawlRequest;
+import com.zinkworks.enterprise.solutions.dto.AtmCurrency;
+import com.zinkworks.enterprise.solutions.entity.Account;
+import com.zinkworks.enterprise.solutions.entity.AtmCurrencyInfo;
+import com.zinkworks.enterprise.solutions.exception.AccountDetailsException;
+import com.zinkworks.enterprise.solutions.exception.AtmBalanceException;
+import com.zinkworks.enterprise.solutions.exception.AtmException;
+import com.zinkworks.enterprise.solutions.repository.AtmCurrencyInfoRepository;
+import com.zinkworks.enterprise.solutions.service.AccountDetailsService;
+import com.zinkworks.enterprise.solutions.service.AtmService;
+
+@Service
+<span class="fc" id="L24">public class AtmServiceImpl implements AtmService {</span>
+	
+	@Value(&quot;${account.valid.message}&quot;)
+	private String accountErrorMessage;
+	
+	@Value(&quot;${account.balance.message}&quot;)
+	private String accountBalanceErrorMessage;
+	
+	@Value(&quot;${incorrectatmamount.message}&quot;)
+	private String atmAmountNotValid;
+	
+	@Value(&quot;${atmcurrency.message}&quot;)
+	private String atmErrorMessage;
+	
+	@Value(&quot;${atmnocurrency.message}&quot;)
+	private String atmCurrencyMessage;
+	
+	@Autowired
+	private AtmCurrencyInfoRepository atmCurrencyInfoRepository;
+	@Autowired
+	private AccountDetailsService accountService;
+	
+	
+	@Override
+	public AtmCurrencyInfo getAtmCurrencyDetails(int atmId) {
+<span class="fc" id="L49">		return atmCurrencyInfoRepository.findAtmCurrencyInfoByAtmIdIs(atmId);</span>
+		
+	}
+	
+	public double getCurrentAtmBalanceAmount(AtmCurrencyInfo paramAtmCurrencyInfo) {
+<span class="fc" id="L54">		double currentAtmBalanceAmount = 0.0;</span>
+<span class="fc" id="L55">		Optional&lt;AtmCurrencyInfo&gt; atmCurrencyDetailsObj = Optional.ofNullable(paramAtmCurrencyInfo);</span>
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">		if (atmCurrencyDetailsObj.isPresent()) {</span>
+<span class="fc" id="L57">			double fiftyEuroCurrencyCount = atmCurrencyDetailsObj.get().getFiftyEuroCurrencyCount();</span>
+<span class="fc" id="L58">			double twentyEuroCurrencyCount = atmCurrencyDetailsObj.get().getTwentyEuroCurrencyCount();</span>
+<span class="fc" id="L59">			double tenEuroCurrencyCount = atmCurrencyDetailsObj.get().getTenEuroCurrencyCount();</span>
+<span class="fc" id="L60">			double fiveEuroCurrencyCount = atmCurrencyDetailsObj.get().getFiveEuroCurrencyCount();</span>
+			
+<span class="fc" id="L62">			currentAtmBalanceAmount = (fiftyEuroCurrencyCount *50)</span>
+									+ (twentyEuroCurrencyCount *20)
+									+ (tenEuroCurrencyCount * 10)
+									+ (fiveEuroCurrencyCount * 5);
+		}
+
+<span class="fc" id="L68">		return currentAtmBalanceAmount;</span>
+		
+	}
+	
+	
+	public AtmCurrency getRequestedWithdrawlAmountCurrencyDenominationCounts(int requestedWithdrawlAmount , AtmCurrencyInfo atmCurrencyInfo ) {
+<span class="fc" id="L74">		AtmCurrency disbursedCurrencyDetails = new AtmCurrency() ;</span>
+<span class="fc" id="L75">		 int fiftyCurrencyCount=0, twentyCurrencyCount=0, tenCurrencyCount=0, fiveCurrencyCount=0;</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">		 while (requestedWithdrawlAmount &gt;= 50 ) {</span>
+<span class="fc" id="L77">			 fiftyCurrencyCount = requestedWithdrawlAmount / 50 ;</span>
+<span class="fc" id="L78">			 requestedWithdrawlAmount = requestedWithdrawlAmount % 50; </span>
+			 break;
+		 }
+<span class="fc bfc" id="L81" title="All 2 branches covered.">		 while (requestedWithdrawlAmount &gt;= 20) {</span>
+<span class="fc" id="L82">			 twentyCurrencyCount = requestedWithdrawlAmount / 20 ;</span>
+<span class="fc" id="L83">			 requestedWithdrawlAmount = requestedWithdrawlAmount % 20; </span>
+			 break;
+		 }
+<span class="fc bfc" id="L86" title="All 2 branches covered.">		 while (requestedWithdrawlAmount &gt;= 10) {</span>
+<span class="fc" id="L87">			 tenCurrencyCount = requestedWithdrawlAmount / 10 ;</span>
+<span class="fc" id="L88">			 requestedWithdrawlAmount = requestedWithdrawlAmount % 10; </span>
+			 break;
+		 }
+<span class="fc bfc" id="L91" title="All 2 branches covered.">		 while (requestedWithdrawlAmount &gt;= 5) {</span>
+<span class="fc" id="L92">			 fiveCurrencyCount = requestedWithdrawlAmount / 5 ;</span>
+<span class="fc" id="L93">			 requestedWithdrawlAmount = requestedWithdrawlAmount % 5; </span>
+			 break;
+		 }
+		 
+<span class="fc" id="L97">		 disbursedCurrencyDetails.setFiftyCurrencyCount(fiftyCurrencyCount);</span>
+<span class="fc" id="L98">		 disbursedCurrencyDetails.setTwentyCurrencyCount(twentyCurrencyCount);</span>
+<span class="fc" id="L99">		 disbursedCurrencyDetails.setTenCurrencyCount(tenCurrencyCount);</span>
+<span class="fc" id="L100">		 disbursedCurrencyDetails.setFiveCurrencyCount(fiveCurrencyCount);</span>
+<span class="fc" id="L101">		 disbursedCurrencyDetails.setAmountNotDisburshed(requestedWithdrawlAmount);</span>
+		 
+<span class="fc" id="L103">		 return disbursedCurrencyDetails;</span>
+		 
+	}
+	
+	public String processCustomerAtmWithdrawalRequest(AccountWithdrawlRequest withdrawlRequest) throws AccountDetailsException , AtmBalanceException , AtmException {
+<span class="fc" id="L108">		StringBuilder withdrawlRequestStatus = new StringBuilder();</span>
+<span class="fc" id="L109">		AtmCurrency disbursedCurrencyDetails = new AtmCurrency();</span>
+<span class="fc" id="L110">		 Optional&lt;Account&gt; accountObject = Optional.ofNullable(accountService.getAccountDetailsFromDbForRequest(withdrawlRequest)); </span>
+<span class="pc bpc" id="L111" title="1 of 2 branches missed.">		 if (accountObject.isPresent()) {  // Account valid</span>
+<span class="fc" id="L112">			 Account verifiedAccountObject = accountObject.get();</span>
+<span class="fc" id="L113">			 double customerAccountBalanceWithOverdraft = verifiedAccountObject.getOpeningBalanceAmount()</span>
+<span class="fc" id="L114">					 		+ verifiedAccountObject.getOverdraftAmount();</span>
+<span class="fc" id="L115">			 Optional&lt;AtmCurrencyInfo&gt; atmCurrencyInfo = Optional.ofNullable(getAtmCurrencyDetails(withdrawlRequest.getAtmId()));</span>
+<span class="pc bpc" id="L116" title="1 of 2 branches missed.">			 if (atmCurrencyInfo.isPresent()) {  // Atm Currency available</span>
+<span class="fc" id="L117">				  double atmCurrencyBalance = getCurrentAtmBalanceAmount(atmCurrencyInfo.get()) ;</span>
+				  
+<span class="pc bpc" id="L119" title="1 of 2 branches missed.">				  if ( withdrawlRequest.getWithdrawlAmount() &lt;= atmCurrencyBalance ) { // AtmCurrency less than equal to withdrawl amount</span>
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">					 if (withdrawlRequest.getWithdrawlAmount() &lt;= customerAccountBalanceWithOverdraft ) {</span>
+<span class="fc" id="L121">						 disbursedCurrencyDetails = getRequestedWithdrawlAmountCurrencyDenominationCounts(withdrawlRequest.getWithdrawlAmount() , atmCurrencyInfo.get() );</span>
+<span class="fc bfc" id="L122" title="All 2 branches covered.">						 if (disbursedCurrencyDetails.getAmountNotDisburshed() == 0) {  // Requested amount not disburses</span>
+<span class="fc" id="L123">							 withdrawlRequestStatus.append(disbursedCurrencyDetails.getDisdursedCurrencyDetailsAsString());</span>
+<span class="fc" id="L124">							 accountService.updateAccountBalance(verifiedAccountObject, withdrawlRequest.getWithdrawlAmount());</span>
+<span class="fc" id="L125">							 updateAccountAndAtmCurrency(atmCurrencyInfo.get() ,disbursedCurrencyDetails , verifiedAccountObject);</span>
+							 
+							 }
+							 else {
+<span class="fc" id="L129">								 throw new AtmBalanceException (atmAmountNotValid);</span>
+							 }
+						 }
+						 else 
+						 {
+<span class="nc" id="L134">							 throw new AccountDetailsException(accountBalanceErrorMessage);</span>
+						 }
+				 }
+				 else {
+<span class="nc" id="L138">					 throw new  AtmException(atmCurrencyMessage);</span>
+				 }
+<span class="fc" id="L140">			 }</span>
+			 else {
+<span class="nc" id="L142">				 throw new AtmException(atmAmountNotValid);</span>
+			 }
+<span class="fc" id="L144">		 } else {</span>
+<span class="nc" id="L145">			 throw new AccountDetailsException(accountErrorMessage);</span>
+		 }
+		 
+<span class="fc" id="L148">		 return withdrawlRequestStatus.toString();</span>
+			 
+	}
+	
+	@Transactional(rollbackFor = SQLException.class)
+	public void updateAccountAndAtmCurrency(AtmCurrencyInfo currentAtmCurrencyInfo , 
+				AtmCurrency disbursedAtmCurrency , Account accountObject)
+	{
+<span class="fc" id="L156">		currentAtmCurrencyInfo.setFiftyEuroCurrencyCount(currentAtmCurrencyInfo.getFiftyEuroCurrencyCount()-disbursedAtmCurrency.getFiftyCurrencyCount());</span>
+<span class="fc" id="L157">		currentAtmCurrencyInfo.setTwentyEuroCurrencyCount(currentAtmCurrencyInfo.getTwentyEuroCurrencyCount()-disbursedAtmCurrency.getTwentyCurrencyCount());</span>
+<span class="fc" id="L158">		currentAtmCurrencyInfo.setTenEuroCurrencyCount(currentAtmCurrencyInfo.getTenEuroCurrencyCount()-disbursedAtmCurrency.getTenCurrencyCount());</span>
+<span class="fc" id="L159">		currentAtmCurrencyInfo.setFiveEuroCurrencyCount(currentAtmCurrencyInfo.getFiveEuroCurrencyCount()-disbursedAtmCurrency.getFiveCurrencyCount());</span>
+<span class="fc" id="L160">		accountService.updateAccountDetails(accountObject);</span>
+<span class="fc" id="L161">		atmCurrencyInfoRepository.saveAndFlush(currentAtmCurrencyInfo);</span>
+<span class="fc" id="L162">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

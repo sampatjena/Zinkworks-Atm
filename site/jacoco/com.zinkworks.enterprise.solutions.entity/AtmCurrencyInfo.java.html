@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AtmCurrencyInfo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Zinkworks-Atm</a> &gt; <a href="index.source.html" class="el_package">com.zinkworks.enterprise.solutions.entity</a> &gt; <span class="el_source">AtmCurrencyInfo.java</span></div><h1>AtmCurrencyInfo.java</h1><pre class="source lang-java linenums">package com.zinkworks.enterprise.solutions.entity;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = &quot;atmcurrencyinfo&quot;)
+public class AtmCurrencyInfo {
+	
+	@Id
+	@Column(name = &quot;atm_id&quot;)
+	private int atmId;
+	
+	@Column(name = &quot;fifty_euro_count&quot;)
+	private double fiftyEuroCurrencyCount;
+	
+	@Column(name = &quot;twenty_euro_count&quot;)
+	private double twentyEuroCurrencyCount;
+	
+	@Column(name = &quot;ten_euro_count&quot;)
+	private double tenEuroCurrencyCount;
+	
+	@Column(name = &quot;five_euro_count&quot;)
+	private double fiveEuroCurrencyCount;
+
+<span class="fc" id="L28">	public AtmCurrencyInfo() {</span>
+<span class="fc" id="L29">			}</span>
+
+	public int getAtmId() {
+<span class="fc" id="L32">		return atmId;</span>
+	}
+
+	public void setAtmId(int atmId) {
+<span class="fc" id="L36">		this.atmId = atmId;</span>
+<span class="fc" id="L37">	}</span>
+
+	public double getFiftyEuroCurrencyCount() {
+<span class="fc" id="L40">		return fiftyEuroCurrencyCount;</span>
+	}
+
+	public void setFiftyEuroCurrencyCount(double fiftyEuroCurrencyCount) {
+<span class="fc" id="L44">		this.fiftyEuroCurrencyCount = fiftyEuroCurrencyCount;</span>
+<span class="fc" id="L45">	}</span>
+
+	public double getTwentyEuroCurrencyCount() {
+<span class="fc" id="L48">		return twentyEuroCurrencyCount;</span>
+	}
+
+	public void setTwentyEuroCurrencyCount(double twentyEuroCurrencyCount) {
+<span class="fc" id="L52">		this.twentyEuroCurrencyCount = twentyEuroCurrencyCount;</span>
+<span class="fc" id="L53">	}</span>
+
+	public double getTenEuroCurrencyCount() {
+<span class="fc" id="L56">		return tenEuroCurrencyCount;</span>
+	}
+
+	public void setTenEuroCurrencyCount(double tenEuroCurrencyCount) {
+<span class="fc" id="L60">		this.tenEuroCurrencyCount = tenEuroCurrencyCount;</span>
+<span class="fc" id="L61">	}</span>
+
+	public double getFiveEuroCurrencyCount() {
+<span class="fc" id="L64">		return fiveEuroCurrencyCount;</span>
+	}
+
+	public void setFiveEuroCurrencyCount(double fiveEuroCurrencyCount) {
+<span class="fc" id="L68">		this.fiveEuroCurrencyCount = fiveEuroCurrencyCount;</span>
+<span class="fc" id="L69">	}</span>
+	
+	
+	
+	
+	
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
