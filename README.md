@@ -19,7 +19,7 @@ Use cases which have been documented and developed are :
 
 Unit testing and code coverage for the Controller , Service and Repository clasess are at 60% .
 Details of the testing and code coverage report are available at folder location : 
-https://github.com/sampatjena/Zinkworks-Atm/blob/d0d1874237ecb9b4b0384832251c07da21ce78d3/site/jacoco/index.html
+     site/jacoco/index.html
 
 Spring rest controller post endpoints for various transactions are :
 1. Customer view balance: /v1/api/atm/accountdetails                     
@@ -38,8 +38,8 @@ Spring rest controller post endpoints for various transactions are :
    } 
    
 2. Customer request to withdraw amount : /v1/api/atm/accountwithdrawl
-   2.1 Json format request exmaple :
-    
+
+		2.1 Json format request exmaple :
 	{
     "accountNumber": "987654321",
     "accountPin": "4321",
