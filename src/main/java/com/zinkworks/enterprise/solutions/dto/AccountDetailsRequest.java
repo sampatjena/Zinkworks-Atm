@@ -37,5 +37,9 @@ public class AccountDetailsRequest {
 	public void setAccountPin(String accountPin) {
 		this.accountPin = accountPin;
 	}
+	
+	public String toString() {
+		return getAccountNumber()+"\t"+getAccountPin();
+	}
 
 }
