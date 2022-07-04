@@ -34,7 +34,8 @@ Spring rest controller post endpoints for various transactions are :
      }
  
  1.2 Json response:
- 	{
+ 	
+	{
 		"accountBalanceAmount": 1230.0,
 		"accountOverdraftAmount": 150.0,
 		"accountTotalWithdrawlAmountWithOverdraft": 1380.0
@@ -43,6 +44,7 @@ Spring rest controller post endpoints for various transactions are :
 2. Customer request to withdraw amount : /v1/api/atm/accountwithdrawl
 
 	2.1 Json format request exmaple :
+	
 	{
 		"accountNumber": "987654321",
 		"accountPin": "4321",
@@ -52,9 +54,19 @@ Spring rest controller post endpoints for various transactions are :
   
 
   2.2 Json response :
-     Currency disbursed : 1 Fifty Euro.1 Twenty Euro.1 Ten Euro.
+     
+	 Currency disbursed : 1 Fifty Euro.1 Twenty Euro.1 Ten Euro.
 
 Github respository information : https://github.com/sampatjena/Zinkworks-Atm.git
+
+Steps to compile and run the application : 
+  
+   1. Clone the project from https://github.com/sampatjena/Zinkworks-Atm.git
+
+   2. mvn clean install
+
+   3. mvn spring-boot:run
+
 
 
 
