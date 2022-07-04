@@ -29,7 +29,8 @@ Spring rest controller post endpoints for various transactions are :
 		"accountNumber": "987654321",
 		"accountPin": "4321"
      }
-  1.2 Json response:
+ 
+ 1.2 Json response:
  	{
 		"accountBalanceAmount": 1230.0,
 		"accountOverdraftAmount": 150.0,
@@ -46,6 +47,7 @@ Spring rest controller post endpoints for various transactions are :
 		"atmId":"11"
     }
   
+
   2.2 Json response :
      Currency disbursed : 1 Fifty Euro.1 Twenty Euro.1 Ten Euro.
 
