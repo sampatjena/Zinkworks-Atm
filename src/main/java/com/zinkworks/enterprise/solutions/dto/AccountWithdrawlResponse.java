@@ -6,8 +6,6 @@ public class AccountWithdrawlResponse {
 	private int twentyCurrencyCount;
 	private int tenCurrencyCount;
 	private int fiveCurrencyCount;
-	private double newWithdrawlBalance;
-	private double newOverdraftBalance;
 	public AccountWithdrawlResponse() {
 			}
 	public int getFiftyCurrencyCount() {
@@ -34,23 +32,10 @@ public class AccountWithdrawlResponse {
 	public void setFiveCurrencyCount(int fiveCurrencyCount) {
 		this.fiveCurrencyCount = fiveCurrencyCount;
 	}
-	public double getNewWithdrawlBalance() {
-		return newWithdrawlBalance;
-	}
-	public void setNewWithdrawlBalance(double newWithdrawlBalance) {
-		this.newWithdrawlBalance = newWithdrawlBalance;
-	}
-	public double getNewOverdraftBalance() {
-		return newOverdraftBalance;
-	}
-	public void setNewOverdraftBalance(double newOverdraftBalance) {
-		this.newOverdraftBalance = newOverdraftBalance;
-	}
 	
 	public String getfittyEuroNotesAsString() {
 		return getFiftyCurrencyCount()+" "+"Currency notes";
 	}
-	
 	public String gettwentyEuroNotesAsString() {
 		return getTwentyCurrencyCount()+" "+"Currency notes";
 	}

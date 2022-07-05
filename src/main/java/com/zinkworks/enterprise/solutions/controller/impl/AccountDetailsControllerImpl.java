@@ -21,17 +21,20 @@ import com.zinkworks.enterprise.solutions.exception.AtmBalanceException;
 import com.zinkworks.enterprise.solutions.exception.AtmException;
 import com.zinkworks.enterprise.solutions.service.AccountDetailsService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 @RestController
+@Api(value = "AccountDetails", description = "the AccountDetails API")
 @RequestMapping("/v1/api/atm")
 public class AccountDetailsControllerImpl implements AccountDetailsController {
 	
 	@Autowired AccountDetailsService accountServiceObject;
 	 @ApiOperation(value = "Account details API", notes = "Account details balance api", response = AccountDetailsResponse.class)
 	  @ApiResponses ({
+		  @ApiResponse(code =200, message =" Account detail", response = AccountDetailsResponse.class),
 	      @ApiResponse(code = 404, message = "Account Number Not Found", response = AccountDetailsException.class),
 	      @ApiResponse(code = 500, message = "Un Expected Error", response = AtmException.class)
 	  })

@@ -1,8 +1,11 @@
 package com.zinkworks.enterprise.solutions.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class AccountDetailsResponse {
-	
+	@JsonProperty("accountBalanceAmount")
 	private double accountBalanceAmount;
+	@JsonProperty("accountOverdraftAmount")	
 	private double accountOverdraftAmount;
 	
 	public AccountDetailsResponse() {}

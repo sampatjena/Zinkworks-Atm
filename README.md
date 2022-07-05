@@ -19,7 +19,12 @@ Use cases which have been documented and developed are :
 	2. Spring Boot 2.7.0
 	3. H2 Inmemory DB
 	4. Maven for code compilation and running of application.
+	4. Swagger for Api design and documentation
 
+Both Api's along with their request and responses have been annotated with Swagger annotations.
+The swagger ui can be viewed as per the below url on executing the application:
+	http://localhost:8080/swagger-ui.html
+	
 Unit testing and code coverage for the Controller , Service and Repository clasess are at 60% .
 Details of the testing and code coverage report are available at folder location : 
 	
