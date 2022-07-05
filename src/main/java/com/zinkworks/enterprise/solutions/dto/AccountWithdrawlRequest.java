@@ -3,12 +3,16 @@ package com.zinkworks.enterprise.solutions.dto;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class AccountWithdrawlRequest extends AccountDetailsRequest {
 	
+	@JsonProperty("withdrawlAmount")
 	@NotNull(message = "Withdrawl amount is required")
 	@Positive(message = "Please proivide a valid amount")
 	private int withdrawlAmount;
 	
+	@JsonProperty("atmId")	
 	@NotNull(message = "Atm is is required")
 	@Positive(message = "Atm id is not valid")
 	private int atmId ;
